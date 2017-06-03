@@ -22,7 +22,7 @@ window.onload = function() {
                   },
                   "id_oferta": "",
                   "imagens": {
-                    "imagem": f.images["src"]
+                    "imagem": f.images[0].src
                   }
                 });
 
