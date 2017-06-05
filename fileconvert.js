@@ -4,11 +4,13 @@ window.onload = function() {
       var json = {
         produto: []
       };
+
       var value = 0;
       $.each(data, function(i, f) {
 
                var tblRow = "<tr>" + "<td>" + f.id + "</td>" +
                 "<td>" + f.name + "</td>" + "<td>" + f.price + "</td>" + "<td>" + f.images[0].src + "</td>" + "</tr>"
+                
                 $(tblRow).appendTo("#userdata tbody");
                 json.produto.push({
                   "agrupador" : f.id,
@@ -17,15 +19,17 @@ window.onload = function() {
                   "canal_buscape" : {
                     "canal_url": f.permalink,
                     "valores":{
-                      "forma_de_pagamento": "pagseguro",
-                      "pacelamento": "",
-                      "canal_preco": f.price
+                      "valor":[{
+                        "forma_de_pagamento": "pagseguro",
+                        "pacelamento": "",
+                        "canal_preco": f.price
+                      }]
                     }
                   },
                   "id_oferta": "",
-                  "imagens": [{
-
-                  }],
+                  "imagens": {
+                    "imagem": [{}]
+                  },
                    "categoria": f.categories[0].name,
                    "cod_barra": "",
               		 "disponibilidade": f.stock_quantity,
@@ -33,40 +37,73 @@ window.onload = function() {
               		 "comprimento": f.dimensions.width,
               		 "largura": f.dimensions.length,
               		 "peso": f.weight,
-                   "especificacoes":[{
-                     "especificacao":{
-                       "nome": "",
-                       "valor":""
-                     }
-                   }],
-                   "atributos":[{
-                     "atributo":{
-                       "nome": "",
-                       "valor":""
-                     }
-                   }]
+                   "especificacoes":{
+                     "especificacao":{}
+                   },
+                   "atributos":{
+                      "atributo":{}
+                   }
                   });
 
-                $.each(f.images,function(i,f){
-                  json.produto[value].imagens.push({
-                    "imagem": f.src
-                  });
+                json.produto[value].imagens.imagem = f.images;
+                
+                $.each(json.produto[value].imagens.imagem,function(i,f){
+                  json.produto[value].imagens.imagem[i] = f.src;
                 });
+                
 
-                $.each(f.attributes,function(i,f){
-                  var valor = "";
-                  $.each(f.options,function(i,f){
-                    if(i+1 < f.length){
-                      valor += f + "/";
-                    }else {
-                      valor += f;
-                      }
+                if(f.attributes.length > 0){
+                  json.produto[value].especificacoes.especificacao = [f.attributes.length];
+
+                  $.each(f.attributes,function(i,f){
+
+                    var valor = "";
+                    $.each(f.options,function(i,ff){
+                        if(i < (f.options.length-1)){
+                          valor += ff + "/";
+                        }
+                        else {
+                          valor += ff ;
+                        }
+                    });
+
+                    var especif = {
+                      "nome": f.name,
+                      "valor": valor
+                    };
+
+                    json.produto[value].especificacoes.especificacao[i] = especif;
+
                   });
-                  json.produto[value].especificacoes.especificacao.push({
-                    "nome": f.name,
-                    "valor": valor
+                }
+
+
+
+                if(f.variations.length > 0){
+                  json.produto[value].atributos.atributo = [f.variations.length];
+
+                  $.each(f.variations,function(i,f){
+
+                    var valor = "";
+                    $.each(f.options,function(i,ff){
+                        if(i < (f.options.length-1)){
+                          valor += ff + "/";
+                        }
+                        else {
+                          valor += ff ;
+                        }
+                    });
+
+                    var especif = {
+                      "nome": f.name,
+                      "valor": valor
+                    };
+
+                    json.produto[value].especificacoes.especificacao[i] = especif;
+
                   });
-                });
+                }
+
 
                 value++;
         });

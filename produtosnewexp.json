@@ -44,9 +44,9 @@
     "sold_individually": false,
     "weight": "",
     "dimensions": {
-      "length": "",
-      "width": "",
-      "height": ""
+      "length": "24214123",
+      "width": "1",
+      "height": "1"
     },
     "shipping_required": true,
     "shipping_taxable": true,
@@ -2542,7 +2542,8 @@
         "visible": true,
         "variation": false,
         "options": [
-          "Vianflex"
+          "Vianflex",
+          "Teste"
         ]
       }
     ],
