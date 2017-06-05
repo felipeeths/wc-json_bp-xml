@@ -24,6 +24,7 @@ window.onload = function() {
                         "pacelamento": "",
                         "canal_preco": f.price
                       }]
+
                     }
                   },
                   "id_oferta": "",
