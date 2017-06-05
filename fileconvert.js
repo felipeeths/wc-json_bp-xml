@@ -1,5 +1,9 @@
-window.onload = function() {
+String.prototype.replaceAll = function(search, replacement) {
+  var target = this;
+  return target.replace(new RegExp(search, 'g'), replacement);
+};
 
+window.onload = function() {
     $.getJSON('produtosnewexp.json', function(data) {
       var json = {
         produto: []
@@ -15,7 +19,7 @@ window.onload = function() {
                 json.produto.push({
                   "agrupador" : f.id,
                   "titulo" : f.name,
-                  "descricao" : f.short_description,
+                  "descricao" : f.short_description.replace(/"/g,"\'").replace(/&nbsp;/g," "),
                   "canal_buscape" : {
                     "canal_url": f.permalink,
                     "valores":{
@@ -45,6 +49,8 @@ window.onload = function() {
                       "atributo":{}
                    }
                   });
+
+                console.log(JSON.stringify(json.produto[value].descricao));
 
                 json.produto[value].imagens.imagem = f.images;
                 
@@ -79,31 +85,7 @@ window.onload = function() {
                 }
 
 
-
-                if(f.variations.length > 0){
-                  json.produto[value].atributos.atributo = [f.variations.length];
-
-                  $.each(f.variations,function(i,f){
-
-                    var valor = "";
-                    $.each(f.options,function(i,ff){
-                        if(i < (f.options.length-1)){
-                          valor += ff + "/";
-                        }
-                        else {
-                          valor += ff ;
-                        }
-                    });
-
-                    var especif = {
-                      "nome": f.name,
-                      "valor": valor
-                    };
-
-                    json.produto[value].especificacoes.especificacao[i] = especif;
-
-                  });
-                }
+                console.log(json.produto[value]);
 
 
                 value++;
