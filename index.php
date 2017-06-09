@@ -11,30 +11,34 @@
   </head>
   <body>
 
-  <script type="text/javascript">
-    convertWooToBuscape();
-
-  </script>
-
     <form id="form" style="width: 50%; padding:100px">
       <div class="form-group">
         <!-- <label for="geturl">URL</label> -->
         <input type="text" class="form-control" name="url" id="url" placeholder="URL">
       </div>
       <div class="form-group">
-        <!-- <label for="geturl">URL</label> -->
-        <input type="text" class="form-control" name="ck" id="ck" placeholder="Client Key">
+        <!-- <label for="geturl">Consumer Key</label> -->
+        <input type="text" class="form-control" name="consumerKey" id="consumerKey" placeholder="Consumer Key">
       </div>
       <div class="form-group">
-        <!-- <label for="geturl">URL</label> -->
-        <input type="text" class="form-control" name="cs" id="cs" placeholder="Client Secret Key">
+        <!-- <label for="geturl">Consumer Secret Key</label> -->
+        <input type="text" class="form-control" name="consumerSecretKey" id="consumerSecretKey" placeholder="Consumer Secret Key">
       </div>
       <div class="form-group">
-        <!-- <label for="geturl">URL</label> -->
-        <input type="text" class="form-control" name="cmd" id="cmd" placeholder="Comando">
+        <!-- <label for="geturl">Extra Command</label> -->
+        <input type="text" class="form-control" name="cmd" id="cmd" placeholder="Extra Command">
       </div>
-      <button class="btn btn-primary" id="send" name="send" type="submit">Gerar XML</button>
-      <button class="btn btn-danger" id="clear" name="clear" type="reset">Limpar</button>
+
+      <div class="form-group" align="center">
+      	<button class="btn btn-primary" id="send" name="send" type="submit">Generate XML</button>
+		<button class="btn btn-danger" id="clear" name="clear" type="reset">Clear</button>
+      </div>
+
+      <div class="form-group" align="center">
+      	<img src="loading.gif" class="hide" id="loading">
+      	<a class="btn btn-success hide" id="download" name="download" target="_blank" type="button">Download</a>
+      </div>
+      
     </form>
 
   </body>
