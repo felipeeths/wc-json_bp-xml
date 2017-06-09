@@ -14,6 +14,7 @@ $(document).ready(function () {
               'cmd': $("#cmd").val().replace(/&/g, '\&')
             },
             success: function (data) {
+
               var xmlFile = new Blob([convertWooToBuscape(JSON.parse(data))], { type: 'text/xml' });
 
               $("#download").attr("href", window.URL.createObjectURL(xmlFile));

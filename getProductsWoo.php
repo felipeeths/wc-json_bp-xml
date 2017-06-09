@@ -26,10 +26,10 @@
 
 	if($cmd != ""){
 		$cmd = trim($cmd);
-		$cmds = split('&', $cmd);
+		$cmds = explode('&', $cmd);
 
 		foreach ($cmds as $key) {
-			$key = split('=', $key);
+			$key = explode('=', $key);
 			$params[ $key[0] ] = $key[1];
 		}
 	}
