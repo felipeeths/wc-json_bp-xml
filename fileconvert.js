@@ -31,9 +31,15 @@ $(document).ready(function () {
 
 function convertJSon2XML(json) {
     var x2js = new X2JS();
+    var d = new Date();
+
+    //"<?xml version="1.0" encoding="UTF-8" ?>',
 
     var xml = {
-      root: json
+      buscape: {
+        "data_atualizacao": d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear(),
+        "produtos": json
+      }
     };
 
     return x2js.json2xml_str(xml);
@@ -131,6 +137,6 @@ function convertWooToBuscape(data) {
     value++;
   });
 
-  return convertJSon2XML(json);
+  return '<?xml version="1.0" encoding="UTF-8" ?>\n' + convertJSon2XML(json);
 
 };
