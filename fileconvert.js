@@ -14,8 +14,9 @@ $(document).ready(function () {
               'cmd': $("#cmd").val().replace(/&/g, '\&')
             },
             success: function (data) {
-
-              var xmlFile = new Blob([convertWooToBuscape(JSON.parse(data))], { type: 'text/xml' });
+              
+              //console.log(data);
+              var xmlFile = new Blob([convertWooToBuscape(JSON.parse(data))], { type: 'text/xml;charset=ISO-8859-1' });
 
               $("#download").attr("href", window.URL.createObjectURL(xmlFile));
               $("#loading").addClass("hide");
@@ -41,6 +42,9 @@ function convertJSon2XML(json) {
         "produtos": json
       }
     };
+
+
+    console.log(JSON.stringify(xml));
 
     return x2js.json2xml_str(xml);
 }
@@ -71,15 +75,15 @@ function convertWooToBuscape(data) {
         "valores": {
           "valor" : [
             {"forma_de_pagamento": "cartao_avista",
-            "pacelamento": "1x de R$ " + valor_total.toFixed(2),
+            "parcelamento": "1x de R$ " + valor_total.toFixed(2),
             "canal_preco": "R$ " + valor_total.toFixed(2) },
 
             {"forma_de_pagamento": "cartao_parcelado_com_juros",
-            "pacelamento": "12x de R$ " + valor_parcela_cartao_12x_com_juros.toFixed(2),
+            "parcelamento": "12x de R$ " + valor_parcela_cartao_12x_com_juros.toFixed(2),
             "canal_preco": "R$ " + valor_total_cartao_12x_com_juros.toFixed(2)},
 
             {"forma_de_pagamento": "cartao_parcelado_sem_juros",
-            "pacelamento": "3x de R$ " + valor_parcela_cartao_3x_sem_juros.toFixed(2),
+            "parcelamento": "3x de R$ " + valor_parcela_cartao_3x_sem_juros.toFixed(2),
             "canal_preco": "R$ " + valor_total.toFixed(2)}
           ]
         }
@@ -133,10 +137,21 @@ function convertWooToBuscape(data) {
 
       });
     }
+    else{
+      json.produto[value].especificacoes.especificacao = [{
+        "nome": " ",
+        "valor": " "
+      }];
+    }
+
+    json.produto[value].atributos.atributo = [{
+      "nome": " ",
+      "valor": " "
+    }];
 
     value++;
   });
 
-  return '<?xml version="1.0" encoding="UTF-8" ?>\n' + convertJSon2XML(json);
+  return convertJSon2XML(json); //'<?xml version="1.0" encoding="ISO-8859-1" ?>\n' 
 
 };

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/abdmob/x2js/master/xml2json.js"></script>
     <script type="text/javascript" src="assets/js/jquery.min.js"> </script>
     <script type="text/javascript" src="fileconvert.js"></script>
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
